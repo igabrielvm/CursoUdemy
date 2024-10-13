@@ -1,0 +1,52 @@
+package ExSessaoQuatro;
+
+import javax.swing.JOptionPane;
+import java.util.ArrayList;
+
+public class mediaNotas {
+    public static void main(String[] args) {
+
+        ArrayList<Double> certas = new ArrayList<>();
+        ArrayList<Double> erradas = new ArrayList<>();
+
+        while (true) {
+
+            int entrada = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite a opção desejada:\n1 - Informar as notas\n2 - Calcular\n3 - Notas inválidas e válidas\n4 - Sair"));
+
+            if (entrada == 1) {
+                while (true) {
+                    Double notas = Double.parseDouble(JOptionPane.showInputDialog("Digite a nota de um aluno para registrar no sistema" +
+                            " \nDigite '-1' para voltar ao menu de escolhas:"));
+
+                    if (notas == -1) {
+                        break;
+                    }
+                    if (notas >= 0 && notas <= 10) {
+                        JOptionPane.showMessageDialog(null, "Nota adicionada!");
+                        certas.add(notas);
+                    } else if (notas < 0 || notas > 10) {
+                        JOptionPane.showMessageDialog(null, "Nota Inválida! Digite uma nota de 0 à 10");
+                        erradas.add(notas);
+                    }
+                }
+            } else if (entrada == 2) {
+                if (certas.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Nenhuma nota válida foi informada");
+                } else {
+                    double soma = 0;
+                    for (double nota : certas) {
+                        soma += nota;
+                    }
+                    double media = soma / certas.size();
+                    JOptionPane.showMessageDialog(null, "A média das notas válidas é: " + media);
+                }
+            } else if (entrada == 3) {
+                JOptionPane.showMessageDialog(null, "As notas válidas são: " + certas + "Com um total de " + certas.size() + " notas válidas");
+                JOptionPane.showMessageDialog(null, "As notas inválidas são: " + erradas + "Com um total de " + erradas.size() + " notas inválidas");
+
+            } else if (entrada == 4) {
+                break;
+            }
+        }
+    }
+}
